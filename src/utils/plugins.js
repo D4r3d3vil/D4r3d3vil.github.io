@@ -10,5 +10,5 @@ function formatTOC(){
 export function SideTOC() {
     let TOC = formatTOC()
     TOC.querySelector('ul').classList.add("menu", "h-full", "whitespace-normal")
-    TOC.classList.add("fixed","h-1", "top-0", "h-full", "bg-base-200", "w-[25%]", "max-w-[250px]", "hidden", "md:block")
+    TOC.classList.add("fixed","h-1", "top-0", "h-full", "bg-base-200", "w-[25%]", "max-w-[250px]", "hidden", "md:block", "mt-16")
 }
