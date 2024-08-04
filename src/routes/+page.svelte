@@ -120,7 +120,7 @@
       </div>
       {/if}
       <button class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
-        <a href="/projects">View all posts</a>
+        <a href="/blog">View all posts</a>
       </button>
       </h2>
     </div>

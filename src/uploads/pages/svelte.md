@@ -3,6 +3,9 @@ layout: IT
 title: "SvelteKit: The future of web development"
 image: /images/svelte.jpeg
 ---
+<script>
+    import Window from '$lib/Window.svelte'
+</script>
 ## Background
 
 SvelteKit is a meta-framework that renders server-side web applications written in svelte, the most loved UI library in the world<sup>1</sup>. It gained its popularity by allowing developers to ship apps faster by being lightweight with easy state management, reactivity, and server side components. It also features a compiler, providing static HTML which is crucial for performance, non-server hosting, and SEO.
