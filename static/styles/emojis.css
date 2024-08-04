@@ -1,0 +1,134 @@
+.emoji::after {
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.hearts::after {
+    content: '❤️';
+    --emoji-1: '🧡';
+    --emoji-2: '💛';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.globe::after{
+    content: '🌐';
+    --emoji: '🛠️';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.python::after{
+    content: '🐍';
+    --emoji: '🖥️';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.django::after{
+    content: '🐍';
+    --emoji: '🌐';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.react::after{
+    content: '⚛️';
+    --emoji-1: '💻';
+    --emoji-2: '📱';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.saas::after{
+    content: '☁️';
+    --emoji-1: '💼';
+    --emoji-2: '🖥️';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.lazyload::after{
+    content: '⏳';
+    --emoji-1: '🔁';
+    --emoji-2: '🖼️';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.mobile::after{
+    content: '📱';
+    --emoji: '🚀';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.cms::after{
+    content: '📝';
+    --emoji-1: '🗃️';
+    --emoji-2: '💻';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.performance::after{
+    content: '🎭';
+    --emoji: '🎩';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.dynamite::after{
+    content: '🧨';
+    --emoji-1: '💥';
+    --emoji-2: '🔥';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.design::after{
+    content: '🖌️';
+    --emoji-1: '🎨';
+    --emoji-2: '🖼️';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.git::after{
+    content: '🕸️';
+    --emoji: '💾';
+    animation-name: twoFrames;
+    animation-duration: 1.5s;
+}
+
+.api::after{
+    content: '☁️';
+    --emoji-1: '📤';
+    --emoji-2: '📩';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+.animation::after{
+    content: '🏃🏻‍♂️';
+    --emoji-1: '💨';
+    --emoji-2: '🥇';
+    animation-name: threeFrames;
+    animation-duration: 3s;
+}
+
+@keyframes twoFrames {
+    50% {
+        content: var(--emoji);
+    }
+}
+
+@keyframes threeFrames {
+    33.333% {
+        content: var(--emoji-1);
+    }
+
+    66.666% {
+        content: var(--emoji-2);
+    }
+}
