@@ -44,7 +44,7 @@ jobs:
       - name: Check for new posts
         id: check_new_files
         run: |
-          new_files=$(git diff --name-only HEAD^ HEAD | grep 'uploads/pages/' || echo "")
+          new_files=$(git diff --name-only HEAD~1 HEAD | grep 'uploads/pages/' || echo "")
           echo "New files: $new_files"
           echo "::set-output name=new_files::$new_files"
 
