@@ -50,6 +50,14 @@ jobs:
           echo "uploads_files<<EOF" >> $GITHUB_ENV
           echo "$uploads_files" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
+          echo "uploads_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$uploads_files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Debugging - Display files
+        run: |
+          echo "Files found:"
+          echo "${{ steps.list_files.outputs.uploads_files }}"
 
       - name: Upload new posts to Supabase
         if: ${{ steps.list_files.outputs.uploads_files != '' }}
@@ -57,6 +65,7 @@ jobs:
           IFS=$'\n' read -d '' -r -a files <<< "${{ steps.list_files.outputs.uploads_files }}"
           for file in "${files[@]}"
           do
+            echo "Uploading $file to Supabase"
             curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
             -H "apikey: ${SUPABASE_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_KEY}" \
