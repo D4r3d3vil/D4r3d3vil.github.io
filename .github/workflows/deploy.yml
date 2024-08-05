@@ -62,8 +62,9 @@ jobs:
       - name: Upload new posts to Supabase
         if: ${{ steps.list_files.outputs.uploads_files != '' }}
         run: |
-          IFS=$'\n' read -d '' -r -a files <<< "${{ steps.list_files.outputs.uploads_files }}"
-          for file in "${files[@]}"
+          files="${{ steps.list_files.outputs.uploads_files }}"
+          IFS=$'\n' read -d '' -r -a file_array <<< "$files"
+          for file in "${file_array[@]}"
           do
             echo "Uploading $file to Supabase"
             curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
