@@ -47,6 +47,8 @@
         .content {
           font-size: 1rem;
           padding-left: 5px;
+          word-wrap: break-word;
+          word-break: break-word;
         }
         p {
           padding-left: 20px;

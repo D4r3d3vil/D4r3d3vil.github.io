@@ -4,3 +4,6 @@
   $: component = data.component || null;
 </script>
 <svelte:component this={component} />
+<style>
+  
+</style>
