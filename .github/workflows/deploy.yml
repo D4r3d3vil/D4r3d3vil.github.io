@@ -45,7 +45,7 @@ jobs:
 
       - name: List files in uploads directory
         run: |
-          uploads_files=$(find uploads -type f)
+          uploads_files=$(find 'src/uploads/pages' -type f)
           echo "uploads_files=$uploads_files" >> $GITHUB_ENV
 
       - name: Upload new posts to Supabase
