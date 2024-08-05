@@ -22,7 +22,7 @@
     {#each posts as post}
       <article class="card bg-base-100 shadow-md rounded-lg overflow-hidden">
           <div class="card-body flex flex-col p-4">
-            <h1 class="card-title my-2 mt-md-0 text-xl font-bold text-sky-500"> <a href={post.url} class="post-preview flex flex-col no-underline hover:underline">{post.title} </a></h1>
+            <h1 class="card-title my-2 mt-md-0 text-xl font-bold text-sky-500"> <a href="" class="post-preview flex flex-col no-underline hover:underline">{post.title} </a></h1>
             <div class="card-text content mt-0 mb-3 text-gray-700">
               <p>{post.description}</p>
             </div>
