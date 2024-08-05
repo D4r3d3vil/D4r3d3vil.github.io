@@ -41,7 +41,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with: 
-          fetch-depth: 1
+          fetch-depth: 2
       - name: Check for new posts
         id: check_new_files
         run: |
