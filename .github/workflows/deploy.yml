@@ -40,7 +40,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+        with: 
+          fetch-depth: 1
       - name: Check for new posts
         id: check_new_files
         run: |
