@@ -44,14 +44,15 @@ jobs:
           fetch-depth: 0  # Fetch all history so we have full context
 
       - name: List files in uploads directory
+        id: new-files
         run: |
           uploads_files=$(find src/uploads/pages -type f)
-          echo "uploads_files=$uploads_files" >> $GITHUB_ENV
+          echo "uploads_files=$uploads_files" >> $GITHUB_OUTPUT
 
       - name: Upload new posts to Supabase
-        if: ${{ env.uploads_files != '' }}
+        if: ${{ steps.new-files.outputs.uploads_files != '' }}
         run: |
-          for file in ${{ env.uploads_files }}
+          for file in ${{ steps.new-files.outputs.uploads_files }}
           do
             curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
             -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qanpra3Ntd2RtbXJsZm1hZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjg2NDkxMiwiZXhwIjoyMDM4NDQwOTEyfQ.DKmVtJ8mNDAJx-O_ACnPkO56XQOqoGflcVUtKBru620" \
