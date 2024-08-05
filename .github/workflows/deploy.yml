@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages and Upload New Posts to Supabase
 
 on:
   push:
@@ -7,15 +7,10 @@ on:
 jobs:
   build_site:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      # If you're using pnpm, add this step then change the commands and cache key below to use `pnpm`
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v2
-      #   with:
-      #     version: 8
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -26,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: build
+      - name: Build site
         env:
           BASE_PATH: '/D4r3d3vil.github.io'
         run: |
@@ -36,11 +31,38 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          # this should match the `pages` option in your adapter-static options
           path: 'build/'
 
-  deploy:
+  check_and_upload:
     needs: build_site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check for new posts
+        id: check_new_files
+        run: |
+          new_files=$(git diff --name-only HEAD^ HEAD | grep 'uploads/' || echo "")
+          echo "New files: $new_files"
+          echo "::set-output name=new_files::$new_files"
+
+      - name: Upload new posts to Supabase
+        if: ${{ steps.check_new_files.outputs.new_files != '' }}
+        run: |
+          for file in ${{ steps.check_new_files.outputs.new_files }}
+          do
+            curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qanpra3Ntd2RtbXJsZm1hZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjg2NDkxMiwiZXhwIjoyMDM4NDQwOTEyfQ.DKmVtJ8mNDAJx-O_ACnPkO56XQOqoGflcVUtKBru620" \
+            -H "Authorization: Bearer SUPABASE_KEY" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=minimal" \
+            -d '{ "name": "$file"}'
+          done
+
+  deploy:
+    needs: [build_site, check_and_upload]
     runs-on: ubuntu-latest
 
     permissions:
@@ -50,7 +72,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Deploy
         id: deployment
