@@ -48,6 +48,7 @@ jobs:
         id: list_files
         run: |
           uploads_files=$(find src/uploads/pages -type f)
+          echo $supakey
           for file in ${uploads_files}
           do
             echo "Uploading $file to Supabase"
