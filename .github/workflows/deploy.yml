@@ -49,7 +49,7 @@ jobs:
           uploads_files=$(find src/uploads/pages -type f)
           for file in ${uploads_files}
           do
-          echo file
+          echo $file
           done
           echo "uploads_files<<EOF" >> $GITHUB_ENV
           echo "$uploads_files" >> $GITHUB_ENV
