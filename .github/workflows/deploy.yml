@@ -42,6 +42,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Fetch all history so we have full context
+          supa_key: ${{ secrets.SUPABASE_KEY }}
 
       - name: List files in uploads directory
         id: list_files
@@ -51,8 +52,8 @@ jobs:
           do
             echo "Uploading $file to Supabase"
             curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
-            -H "apikey: ${secrets.SUPABASE_KEY}" \
-            -H "Authorization: Bearer ${secrets.SUPABASE_KEY}" \
+            -H "apikey: ${supa_key}" \
+            -H "Authorization: Bearer ${supa_key}" \
             -H "Content-Type: application/json" \
             -H "Prefer: return=minimal" \
             -d "{\"name\": \"$file\"}"
