@@ -51,7 +51,7 @@ jobs:
           for file in ${uploads_files}
           do
             echo "Uploading $file to Supabase"
-            curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts' \
+            curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts?apikey=${supa_key}' \
             -H "apikey: ${supa_key}" \
             -H "Authorization: Bearer ${supa_key}" \
             -H "Content-Type: application/json" \
