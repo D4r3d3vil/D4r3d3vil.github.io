@@ -2,10 +2,35 @@
   import Card from '../layouts/Card.svelte'
   import Carousel  from 'svelte-carousel';
   import { browser } from '$app/environment';
-  export let data;
+  import { onMount } from 'svelte';
+  export let data, subscibed;
   let socials = [{icon: 'fa-youtube', link:'https://youtube.com/@mulhamalamry'}, {icon: 'fa-x-twitter', link: 'https://x.com/@alamrymulham'}, {icon: 'fa-linkedin', link: 'https://www.linkedin.com/in/mulham-alamry-b14a46270/'}]
   
   let skills = [{name: 'Python', class: 'emoji python'}, {name: 'HTML', class: 'globe'}, {name: 'S/CSS', class: 'design'}, {name: 'Animation', class: 'animation'}, {name: 'Javascript', class: 'hearts'}, {name: 'SvelteKit', class: 'dynamite'}, {name: 'Django', class: 'django'}, {name: 'React', class: 'react'}, {name: 'UI/UX Design', class: 'design'}, {name: 'SaaS', class: 'saas'}, {name: 'GIT', class: 'git'}, {name: 'API', class: 'api'}, {name: 'CMS', class: 'cms'}, {name: 'Wordpress', class: 'cms'}, {name: 'Lazy Loading', class: 'lazyload'}, {name: 'Performance Optimizations', class: 'performance'}, {name: 'Mobile Optimizations', class: 'mobile'}]
+
+  onMount(()=>{
+    subscibed = localStorage.getItem('subscribed')
+    if(subscibed) document.getElementById('subscribeButton').setAttribute('disabled', true)
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const response = await fetch('https://emails.mulhamreacts.workers.dev/', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataObject),
+      });
+      subscibed = true;
+      document.getElementById('subscribeButton').setAttribute('disabled', true)
+      localStorage.setItem('subscribed', true)
+    });
+  })
 </script>
 <link rel="stylesheet" href="/styles/emojis.css">
   <div class="relative min-h-screen snap-center flex items-center justify-center">
@@ -118,12 +143,27 @@
         <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
       </aside>
       <nav>
-        <div class="grid grid-flow-col gap-4">
-          {#each socials as social}
-          <a href={social.link} class="block w-16 p-4 transition duration-300 hover:bg-black hover:bg-opacity-10">
-            <i class="text-3xl fa-brands {social.icon}"></i>
-          </a>
-        {/each}
+        <div class="card w-full shadow-2xl bg-base-100">
+          <div class="card-body">
+            <h2 class="card-title">Subscribe to get latest tech news!</h2>
+            <form id="form">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Name</span>
+                </label>
+                <input type="text" name="Name" placeholder="Your name" class="input input-bordered">
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="email" name="Email" placeholder="Your email" class="input input-bordered">
+              </div>
+              <div class="form-control mt-6">
+                <button type="submit" class="btn btn-primary" id="subscribeButton">{#if subscibed}Subscribed{:else}Submit{/if}</button>
+              </div>
+            </form>
+          </div>
         </div>
         <a href="mailto:inquiries@0xbytes.dev">Contact me: inquiries@0xbytes.dev</a>
       </nav>
