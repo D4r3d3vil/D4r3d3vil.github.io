@@ -43,6 +43,8 @@ jobs:
         with:
           fetch-depth: 0  # Fetch all history so we have full context
           supa_key: ${{ secrets.SUPABASE_KEY }}
+        env:
+          supa_key: ${{ secrets.SUPABASE_KEY }}
 
       - name: List files in uploads directory
         id: list_files
@@ -52,8 +54,8 @@ jobs:
           do
             echo "Uploading $file to Supabase"
             curl -X POST 'https://njjzkksmwdmmrlfmafwe.supabase.co/rest/v1/posts?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qanpra3Ntd2RtbXJsZm1hZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjg2NDkxMiwiZXhwIjoyMDM4NDQwOTEyfQ.DKmVtJ8mNDAJx-O_ACnPkO56XQOqoGflcVUtKBru620' \
-            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qanpra3Ntd2RtbXJsZm1hZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjg2NDkxMiwiZXhwIjoyMDM4NDQwOTEyfQ.DKmVtJ8mNDAJx-O_ACnPkO56XQOqoGflcVUtKBru620" \
-            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qanpra3Ntd2RtbXJsZm1hZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjg2NDkxMiwiZXhwIjoyMDM4NDQwOTEyfQ.DKmVtJ8mNDAJx-O_ACnPkO56XQOqoGflcVUtKBru620" \
+            -H "apikey: ${supa_key}" \
+            -H "Authorization: Bearer ${supa_key}" \
             -H "Content-Type: application/json" \
             -H "Prefer: return=minimal" \
             -d "{\"name\": \"$file\"}"
