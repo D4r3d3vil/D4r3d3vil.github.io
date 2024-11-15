@@ -74,12 +74,12 @@
                     </a>
                 </li>
                 <li class="nav-item p-1 w-full">
-                    <a href="/blog/tags" class="nav-link flex justify-center w-full">
+                    <a class="nav-link flex justify-center w-full">
                         <span class="text-base">TAGS</span>
                     </a>
                 </li>
                 <li class="nav-item p-1 w-full">
-                    <a href="/blog/archives" class="nav-link flex justify-center w-full">
+                    <a class="nav-link flex justify-center w-full">
                         <span class="text-base">ARCHIVES</span>
                     </a>
                 </li>

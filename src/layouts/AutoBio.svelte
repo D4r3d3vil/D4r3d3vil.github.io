@@ -20,7 +20,7 @@
               <strong>digital products</strong> for both business and consumer use.
             </p>
             <p class="mb-16">
-              I'm a bit of a digital product junky. Over the years, I've used hundreds of web and mobile apps in different industries and verticals. Feel free to <a href="/contact"><strong>contact</strong></a> me here.
+              I'm a bit of a digital product junky. Over the years, I've used hundreds of web and mobile apps in different industries and verticals. Feel free to <a><strong>contact</strong></a> me here.
             </p>
           </div>
         </div>
