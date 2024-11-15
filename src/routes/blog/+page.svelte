@@ -1,6 +1,6 @@
 <script>
-  import Posts from "../../layouts/Blog.svelte";
-
+  import BlogView from "../../layouts/BlogView.svelte";
   export let data;
+  let posts = data.uploads;
 </script>
-<Posts data={data} />
+<BlogView {posts}/>

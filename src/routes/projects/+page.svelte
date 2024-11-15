@@ -1,8 +1,8 @@
 <script>
-  import Carousel from "svelte-carousel";
   export let data;
   import Repo from "../../layouts/Card.svelte";
   import { browser } from "$app/environment";
+  import Carousel from "../../layouts/Carousel.svelte";
   let normal = false;
 </script>
 
@@ -28,53 +28,7 @@
     {/each}
   </div>
 {:else if browser}
-  <div
-    class="carousel carousel-center p-4 space-x-4 bg-base-100 rounded-box w-[100%]"
-  >
-    <Carousel
-      autoplay={true}
-      particlesToShow={1000}
-      autoplayDuration={1000}
-      arrows={false}
-      dots={false}
-    >
-      {#each data.projects as project}
-        <div class="carousel-item">
-          <Repo
-            name={project.metadata.project.name}
-            imageSrc={project.metadata.image}
-            username={project.metadata.project.author}
-            post={project.path}
-            description={project.metadata.description}
-          />
-        </div>
-      {/each}
-    </Carousel>
-  </div>
-  <div
-    class="carousel carousel-center p-4 space-x-4 bg-base-100 rounded-box w-[100%]"
-  >
-    <Carousel
-      autoplay={true}
-      particlesToShow={1000}
-      autoplayDuration={1000}
-      arrows={false}
-      dots={false}
-      autoplayDirection={"prev"}
-    >
-      {#each data.projects as project}
-        <div class="carousel-item">
-          <Repo
-            name={project.metadata.project.name}
-            imageSrc={project.metadata.image}
-            username={project.metadata.project.author}
-            post={project.path}
-            description={project.metadata.description}
-          />
-        </div>
-      {/each}
-    </Carousel>
-  </div>
+  <Carousel/>
 {/if}
 
 <style>

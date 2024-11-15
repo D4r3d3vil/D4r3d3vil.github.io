@@ -1,12 +1,24 @@
 <script>
       import "@fortawesome/fontawesome-free/css/all.min.css";
-      import '../app.css'
+      import '../app.css';
+      import {page} from '$app/stores'
+      import { onMount } from 'svelte'
+      import {initTheme, toggleTheme} from "../theme.js";
+      $: hideMenu = $page.data?.hideMenu;
+
+      let themeIcon;
+      onMount(()=>{
+          if (hideMenu) return
+          initTheme(themeIcon)
+      })
+
 </script>
 <div class="portfolio snap-mandatory snap-y h-screen overflow-y-scroll">
+{#if !hideMenu}
 <div class="navbar bg-base-100 sticky top-0 z-50 flex h-16 w-full justify-center bg-opacity-70 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)] shadow-sm p-0 border-b-base-300 border-b-[1px]">
       <div class="navbar-start">
         <div class="dropdown">
-          <label tabindex="0" class="btn btn-ghost lg:hidden">
+          <label tabindex="1" class="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">           
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>         
             </svg>
@@ -37,8 +49,12 @@
                 <li>
                   <a href="/projects" tabindex="0"><i class="fa-solid fa-computer text-2xl" title="projects"></i></a>
               </li>
+              <li>
+                  <i bind:this={themeIcon} on:click={toggleTheme} data-toggle-theme="light,dark"></i>
+              </li>
             </ul>
       </div>
     </div>
+{/if}
 <slot></slot>
 </div>

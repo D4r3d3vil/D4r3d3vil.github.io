@@ -1,38 +1,24 @@
 <script>
     // Generate 10 fake posts
-    const fakePosts = Array.from({ length: 10 }, (_, i) => ({
-      title: `Post Title ${i + 1}`,
-      url: `/post-${i + 1}`,
-      date: new Date().toISOString(),
-      categories: [`Category ${i % 3 + 1}`, `Category ${i % 2 + 1}`],
-      description: `This is a brief description of post ${i + 1}.`,
-      pin: i < 2 // First two posts are pinned
-    }));
-  
-    export let page = 1;
-    export let perPage = 10;
-  
-    let offset = (page - 1) * perPage;
-    let pinnedPosts = fakePosts.filter(post => post.pin);
-    let defaultPosts = fakePosts.filter(post => !post.pin);
-    let posts = [...pinnedPosts.slice(offset), ...defaultPosts.slice(offset - pinnedPosts.length)];
+    export let data;
+    let posts = data.uploads;
   </script>
   
   <div class="flex-grow-1 px-xl-1" id="post-list">
     {#each posts as post}
       <article class="card bg-base-100 shadow-md rounded-lg overflow-hidden">
           <div class="card-body flex flex-col p-4">
-            <h1 class="card-title my-2 mt-md-0 text-xl font-bold text-sky-500"> <a href="/" class="post-preview flex flex-col no-underline hover:underline">{post.title} </a></h1>
+            <h1 class="card-title my-2 mt-md-0 text-xl font-bold text-sky-500"> <a href="/" class="post-preview flex flex-col no-underline hover:underline">{post.metadata.title} </a></h1>
             <div class="card-text content mt-0 mb-3 text-gray-700">
-              <p>{post.description}</p>
+              <p>{post.metadata.description}</p>
             </div>
             <div class="post-meta flex-grow-1 flex items-end text-sm text-gray-500">
               <div class="me-auto flex items-center">
                 <div class="icon me-1">
                   <i class="far fa-calendar-alt"></i>
                 </div>
-                <div>{new Date(post.date).toLocaleDateString()}</div>
-                {#if post.categories.length > 0}
+                <div>{post.metadata.date}</div>
+                {#if post.metadata.categories}
                   <div class="icon me-1 ml-3">
                     <i class="far fa-folder-open"></i>
                   </div>
